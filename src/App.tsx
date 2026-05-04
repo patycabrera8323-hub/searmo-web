@@ -771,7 +771,7 @@ export default function App() {
                   </motion.button>
                   
                   <motion.a 
-                    href="https://yeiya-ai-v2.vercel.app/"
+                    href="https://yeiya-ai-v2-eight.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white/80 backdrop-blur-md hover:bg-white text-stone-900 px-10 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 transition-all border border-stone-200 shadow-sm hover:shadow-md"
