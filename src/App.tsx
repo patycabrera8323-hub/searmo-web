@@ -82,7 +82,7 @@ export default function App() {
 
   // Reliable scroll tracking using state instead of useTransform opacity
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest >= 0.35) {
+    if (latest >= 0.72) {
       setIsRevealed(true);
     } else {
       setIsRevealed(false);
