@@ -351,11 +351,12 @@ export default function App() {
         </motion.svg>
 
         {/* Revealed Content Overlay (The ai Edition) - only visible in second view */}
-        <motion.div 
+        <div
           className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none"
-          animate={{ opacity: isRevealed ? 1 : 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          style={{ scale: revealedScale, transformOrigin: "center left" }}
+          style={{
+            opacity: isRevealed ? 1 : 0,
+            transition: 'opacity 0.4s ease-out',
+          }}
         >
           <div className="max-w-xl w-full">
             <header className="mb-4 md:mb-8 mt-10 md:mt-0">
@@ -391,7 +392,7 @@ export default function App() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div 
