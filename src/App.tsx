@@ -345,8 +345,8 @@ export default function App() {
 
         {/* Revealed Content Overlay (The ai Edition) */}
         <motion.div 
-          className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none"
-          style={{ opacity: revealedOpacity, scale: revealedScale }}
+          className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none will-change-[opacity,transform]"
+          style={{ opacity: revealedOpacity, scale: revealedScale, transformOrigin: "center left" }}
         >
           <div className="max-w-xl w-full">
             <header className="mb-4 md:mb-8 mt-10 md:mt-0">
