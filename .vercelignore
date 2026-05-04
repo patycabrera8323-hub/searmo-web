@@ -1,0 +1,8 @@
+node_modules
+dist
+server.ts
+.env
+.env.local
+.env.example
+*.sqlite
+backend-logs.txt
