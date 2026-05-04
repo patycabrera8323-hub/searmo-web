@@ -401,9 +401,8 @@ export default function App() {
         </div>
       </div>
 
-      <motion.div 
+      <div 
         className="relative z-50"
-        style={{ opacity: sectionsOpacity, y: sectionsY }}
       >
         {/* Sección 1: Innovación (Bento Grid) */}
         <section className="relative z-50 py-24 px-6 md:px-24 bg-[#d7ccc8] border-t border-stone-400/20">
@@ -975,7 +974,7 @@ export default function App() {
             </div>
           </div>
         </footer>
-      </motion.div>
+      </div>
     </div>
   );
 }
