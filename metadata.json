@@ -1,0 +1,5 @@
+{
+  "name": "Copy of SEARMO",
+  "description": "Landing page de SEARMO con formulario de contacto conectado a Google Sheets y enlace a agente conversacional.",
+  "requestFramePermissions": []
+}
