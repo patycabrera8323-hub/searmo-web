@@ -99,7 +99,7 @@ export default function App() {
 
   // New: Precise opacity for the revealed text overlay
   // It starts fading in when the circle is half-way and fades out at the very end
-  const overlayOpacity = useTransform(scrollYProgress, [0.6, 0.75, 0.9, 1], [0, 1, 1, 0]);
+  const overlayOpacity = useTransform(scrollYProgress, [0.6, 0.75], [0, 1]);
   const overlayY = useTransform(scrollYProgress, [0.6, 0.75], [20, 0]);
 
   // Fade out the main text as characters join (from 0 to 0.25)
