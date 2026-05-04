@@ -218,8 +218,8 @@ export default function App() {
         <motion.img 
           src="/char-left-cup-transparent.png"
           alt="Mujer con café"
-          className="absolute right-1/2 bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
-          style={{ x: leftX, translateX: isMobile ? "25%" : "10%" }}
+          className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
+          style={{ x: leftX, translateX: "10%" }}
           fetchPriority="high"
           decoding="async"
           referrerPolicy="no-referrer"
@@ -229,8 +229,8 @@ export default function App() {
         <motion.img 
           src="/char-right-skater-transparent.png"
           alt="Hombre con skate"
-          className="absolute left-1/2 bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
-          style={{ x: rightX, translateX: isMobile ? "-25%" : "-10%" }}
+          className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
+          style={{ x: rightX, translateX: "-10%" }}
           fetchPriority="high"
           decoding="async"
           referrerPolicy="no-referrer"
