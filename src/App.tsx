@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent } from 'framer-motion';
 import { ChevronDown, Zap, Play, Star, MessageSquare, ArrowRight, X, Loader2, CheckCircle } from 'lucide-react';
 
 // Detecta si el usuario está en un dispositivo móvil (menor rendimiento)
@@ -68,6 +68,7 @@ export default function App() {
   const [showCareers, setShowCareers] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
   
   // Track scroll progress within the container
   const { scrollYProgress } = useScroll({
@@ -79,8 +80,14 @@ export default function App() {
   const leftX = useTransform(scrollYProgress, [0, 0.4], ["-60vw", "0vw"]);
   const rightX = useTransform(scrollYProgress, [0, 0.4], ["60vw", "0vw"]);
 
-  // Revealed content opacity - always visible once mask opens (fixed for Vercel)
-  // We no longer rely on scroll-linked opacity which breaks in production
+  // Reliable scroll tracking using state instead of useTransform opacity
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (latest >= 0.42) {
+      setIsRevealed(true);
+    } else {
+      setIsRevealed(false);
+    }
+  });
   const revealedScale = useTransform(scrollYProgress, [0.42, 0.6], [0.9, 1]);
 
   // Sun light effect when they touch (peaks at 0.4)
@@ -343,9 +350,11 @@ export default function App() {
           )}
         </motion.svg>
 
-        {/* Revealed Content Overlay (The ai Edition) */}
+        {/* Revealed Content Overlay (The ai Edition) - only visible in second view */}
         <motion.div 
           className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none"
+          animate={{ opacity: isRevealed ? 1 : 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
           style={{ scale: revealedScale, transformOrigin: "center left" }}
         >
           <div className="max-w-xl w-full">
