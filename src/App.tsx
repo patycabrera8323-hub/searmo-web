@@ -850,7 +850,7 @@ export default function App() {
                       Al enviar, aceptas nuestro <button type="button" onClick={() => setShowPrivacy(true)} className="underline hover:text-stone-600">Aviso de Privacidad</button>.
                     </p>
                     <p className="mt-4 text-sm text-stone-500">
-                      ¿Prefieres hablar directamente? <a href="https://agenteyeiya.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 font-bold">Ve directo al agente aquí.</a>
+                      ¿Prefieres hablar directamente? <a href="https://yeiya-ai-v2-eight.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-cyan-600 font-bold">Ve directo al agente aquí.</a>
                     </p>
                   </div>
                 </div>
