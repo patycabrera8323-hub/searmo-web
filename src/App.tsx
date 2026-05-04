@@ -397,7 +397,7 @@ export default function App() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div 
@@ -990,7 +990,7 @@ export default function App() {
             </div>
           </div>
         </footer>
-      </div>
+      </motion.div>
     </div>
   );
 }
