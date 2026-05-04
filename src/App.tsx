@@ -176,7 +176,7 @@ export default function App() {
 
         {/* Main Hero Text - Fades out as you scroll */}
         <motion.div 
-          className="absolute inset-0 z-30 flex flex-col items-center justify-center text-center px-4 pointer-events-none"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 pointer-events-none"
           style={{ opacity: textOpacity, y: textY, scale: textScale }}
         >
           <motion.div 
