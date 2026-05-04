@@ -94,8 +94,13 @@ export default function App() {
   const lightScale = useTransform(scrollYProgress, [0.35, 0.4, 0.5], [0, 1.5, 4]);
   const lightOpacity = useTransform(scrollYProgress, [0.35, 0.4, 0.45, 0.5], [0, 1, 1, 0]);
 
-  // Circular mask reveal for the new image (starts EXACTLY when they touch at 0.4)
-  const maskSize = useTransform(scrollYProgress, [0.4, 0.55], ["0%", "150%"]);
+  // Circle reveal timing (stretched to reduce dead space)
+  const maskSize = useTransform(scrollYProgress, [0.35, 0.75], ["0%", "150%"]);
+
+  // New: Precise opacity for the revealed text overlay
+  // It starts fading in when the circle is half-way and fades out at the very end
+  const overlayOpacity = useTransform(scrollYProgress, [0.6, 0.75, 0.9, 1], [0, 1, 1, 0]);
+  const overlayY = useTransform(scrollYProgress, [0.6, 0.75], [20, 0]);
 
   // Fade out the main text as characters join (from 0 to 0.25)
   const textOpacity = useTransform(scrollYProgress, [0, 0.25], [1, 0]);
@@ -106,8 +111,8 @@ export default function App() {
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
   // Sections visibility (only show when hero is finished)
-  const sectionsOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
-  const sectionsY = useTransform(scrollYProgress, [0.85, 0.95], [100, 0]);
+  const sectionsOpacity = useTransform(scrollYProgress, [0.9, 1], [0, 1]);
+  const sectionsY = useTransform(scrollYProgress, [0.9, 1], [50, 0]);
 
   // Section 03: Transformation Reveal
   const transformRef = useRef<HTMLDivElement>(null);
@@ -152,7 +157,7 @@ export default function App() {
 
   return (
     <div className="bg-[#d7ccc8]">
-      <div ref={containerRef} className="relative h-[300vh]">
+      <div ref={containerRef} className="relative h-[250vh]">
         {/* Sticky container that stays in view while scrolling */}
         <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
           
@@ -213,8 +218,8 @@ export default function App() {
         <motion.img 
           src="/char-left-cup-transparent.png"
           alt="Mujer con café"
-          className="absolute right-1/2 bottom-0 h-[60vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
-          style={{ x: leftX, translateX: "10%" }}
+          className="absolute right-1/2 bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
+          style={{ x: leftX, translateX: isMobile ? "25%" : "10%" }}
           fetchPriority="high"
           decoding="async"
           referrerPolicy="no-referrer"
@@ -224,8 +229,8 @@ export default function App() {
         <motion.img 
           src="/char-right-skater-transparent.png"
           alt="Hombre con skate"
-          className="absolute left-1/2 bottom-0 h-[60vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
-          style={{ x: rightX, translateX: "-10%" }}
+          className="absolute left-1/2 bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
+          style={{ x: rightX, translateX: isMobile ? "-25%" : "-10%" }}
           fetchPriority="high"
           decoding="async"
           referrerPolicy="no-referrer"
@@ -351,11 +356,11 @@ export default function App() {
         </motion.svg>
 
         {/* Revealed Content Overlay (The ai Edition) - only visible in second view */}
-        <div
+        <motion.div
           className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none"
           style={{
-            opacity: isRevealed ? 1 : 0,
-            transition: 'opacity 0.4s ease-out',
+            opacity: overlayOpacity,
+            y: overlayY,
           }}
         >
           <div className="max-w-xl w-full">
@@ -411,11 +416,12 @@ export default function App() {
         </div>
       </div>
 
-      <div 
+      <motion.div 
         className="relative z-50"
+        style={{ opacity: sectionsOpacity, y: sectionsY }}
       >
         {/* Sección 1: Innovación (Bento Grid) */}
-        <section className="relative z-50 py-24 px-6 md:px-24 bg-[#d7ccc8] border-t border-stone-400/20">
+        <section className="relative z-50 py-24 px-6 md:px-24 bg-[#d7ccc8]">
           <div className="max-w-7xl mx-auto">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
