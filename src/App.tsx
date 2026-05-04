@@ -82,7 +82,7 @@ export default function App() {
 
   // Reliable scroll tracking using state instead of useTransform opacity
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest >= 0.42) {
+    if (latest >= 0.35) {
       setIsRevealed(true);
     } else {
       setIsRevealed(false);
@@ -355,12 +355,13 @@ export default function App() {
           )}
         </motion.svg>
 
-        {/* Revealed Content Overlay (The ai Edition) - only visible in second view */}
-        <motion.div
+        {/* Revealed Content Overlay - visible when circle is open */}
+        <div
           className="absolute inset-0 z-40 flex flex-col items-start justify-center px-6 sm:px-12 md:px-24 pointer-events-none"
           style={{
-            opacity: overlayOpacity,
-            y: overlayY,
+            opacity: isRevealed ? 1 : 0,
+            transform: isRevealed ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
           }}
         >
           <div className="max-w-xl w-full">
@@ -397,7 +398,7 @@ export default function App() {
               ))}
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Scroll Indicator */}
         <motion.div 
