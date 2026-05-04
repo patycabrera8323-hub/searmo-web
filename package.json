@@ -1,12 +1,11 @@
 {
   "name": "searmo-web",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "postinstall": "npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
