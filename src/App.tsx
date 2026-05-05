@@ -493,7 +493,7 @@ export default function App() {
               { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
               { title: "Análisis Profundo", img: "/img1.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
               { title: "Conexión Global", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
-              { title: "Potencia IA", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701337/rosalia-17_1_wvunzy.mp4" }
+              { title: "Potencia IA", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
             ].map((item, i) => (
               <motion.div 
                 key={i}
