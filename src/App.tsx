@@ -491,9 +491,9 @@ export default function App() {
             {[
               { title: "Ecosistema Digital", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701131/grok-video-f0709e25-e241-4dce-936c-8340f21d458b_1_a3jvl7.mp4" },
               { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
-              { title: "Análisis Profundo", img: "/img1.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
-              { title: "Conexión Global", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
-              { title: "Potencia IA", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
+              { title: "Creamos webs inmersivas de alta gama", desc: "Tecnología avanzada que eleva tu marca al siguiente nivel", img: "/img1.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
+              { title: "Conexión global", desc: "Integramos tu negocio con CRM’s sofisticados para una gestión inteligente", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
+              { title: "Creamos apps a medida", desc: "Desde apps de delivery hasta soluciones personalizadas, tú eliges lo mejor para tu negocio", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
             ].map((item, i) => (
               <motion.div 
                 key={i}
