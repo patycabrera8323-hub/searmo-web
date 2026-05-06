@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent } from 'framer-motion';
 import { ChevronDown, Zap, Play, Star, MessageSquare, ArrowRight, X, Loader2, CheckCircle } from 'lucide-react';
+import { db } from './firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 // Detecta si el usuario está en un dispositivo móvil (menor rendimiento)
 const useIsMobile = () => {
@@ -804,17 +806,25 @@ export default function App() {
                       const formData = new FormData(e.currentTarget);
                       const data = Object.fromEntries(formData.entries());
                       try {
-                        await fetch('/api/contact', {
-                          method: 'POST',
-                          headers: { 'Content-Type': 'application/json' },
-                          body: JSON.stringify(data)
+                        // Guardar en Firebase Firestore directamente
+                        await addDoc(collection(db, 'leads'), {
+                          clientName: data.nombre,
+                          phoneNumber: data.telefono,
+                          email: data.correo,
+                          serviceInterest: data.idea,
+                          comment: `Empresa: ${data.empresa} | Ubicación: ${data.direccion}`,
+                          timestamp: new Date().toISOString(),
+                          attended: false,
+                          contactDate: ''
                         });
+                        
                         setSubmitSuccess(true);
                         setTimeout(() => {
                           setShowForm(false);
                           setSubmitSuccess(false);
                         }, 2500);
                       } catch (error) {
+                        console.error("Error saving lead:", error);
                         alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
                       } finally {
                         setIsSubmitting(false);
