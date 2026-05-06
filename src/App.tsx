@@ -818,8 +818,8 @@ export default function App() {
                           contactDate: ''
                         });
 
-                        // 🔔 Notificación push al celular vía ntfy.sh
-                        fetch('https://ntfy.sh/yeiya-leads-paty2026', {
+                        // 🔔 Notificación push al celular vía ntfy.sh (Canal Seguro)
+                        fetch('https://ntfy.sh/yeiya-leads-secure-7x2w9q-patycabrera-2026', {
                           method: 'POST',
                           headers: {
                             'Title': `🔔 Nuevo lead web: ${data.nombre}`,
