@@ -656,21 +656,21 @@ export default function App() {
             </svg>
 
             {[
-              { label: "Clientes Felices", val: "2.5k+", x: "2%", y: "15%", depth: 0, avatar: "😊" },
-              { label: "Actualizaciones", val: "150+", x: "55%", y: "8%", depth: 0, avatar: "🚀" },
+              { label: "Clientes atendidos", val: "14", x: "2%", y: "15%", depth: 0, avatar: "🤝" },
+              { label: "Webs lanzadas", val: "9", x: "55%", y: "8%", depth: 0, avatar: "🌐" },
               { label: "Soporte", val: "24/7", x: "28%", y: "35%", depth: 0, avatar: "🎧" },
-              { label: "Conversión", val: "+45%", x: "5%", y: "92%", depth: 0, avatar: "📈" },
-              { label: "Precisión IA", val: "99.9%", x: "50%", y: "90%", depth: 0, avatar: "🤖" },
-              { label: "ROI", val: "x10", x: "32%", y: "88%", depth: 0, avatar: "💰" },
-              { label: "Latencia", val: "<200ms", x: "58%", y: "42%", depth: 0, avatar: "⚡" },
-              { label: "Países", val: "40+", x: "2%", y: "48%", depth: 0, avatar: "🌍" },
+              { label: "Mensajes gestionados", val: "3.2k", x: "5%", y: "55%", depth: 0, avatar: "💬" },
+              { label: "Bots activos", val: "6", x: "50%", y: "90%", depth: 0, avatar: "🤖" },
+              { label: "Tiempo de entrega", val: "15 días", x: "32%", y: "88%", depth: 0, avatar: "📦" },
+              { label: "Satisfacción", val: "97%", x: "58%", y: "42%", depth: 0, avatar: "⭐" },
+              { label: "Proyectos activos", val: "4", x: "2%", y: "80%", depth: 0, avatar: "🛠️" },
               // Background "blurred" bubbles
-              { label: "Data Sync", val: "Active", x: "5%", y: "92%", depth: 2, avatar: "☁️" },
-              { label: "Neural Net", val: "Processing", x: "65%", y: "22%", depth: 1, avatar: "🧠" },
-              { label: "Cloud Ops", val: "Stable", x: "38%", y: "5%", depth: 2, avatar: "☁️" },
-              { label: "Security", val: "Encrypted", x: "65%", y: "92%", depth: 1, avatar: "🛡️" },
-              { label: "Analytics", val: "Real-time", x: "2%", y: "5%", depth: 2, avatar: "📊" },
-              { label: "DevOps", val: "Automated", x: "18%", y: "95%", depth: 1, avatar: "🛠️" },
+              { label: "WhatsApp Bot", val: "Online", x: "5%", y: "92%", depth: 2, avatar: "📱" },
+              { label: "Automatizaciones", val: "En proceso", x: "65%", y: "22%", depth: 1, avatar: "⚙️" },
+              { label: "Propuestas", val: "Listas", x: "38%", y: "5%", depth: 2, avatar: "📄" },
+              { label: "Pagos", val: "Seguros", x: "65%", y: "92%", depth: 1, avatar: "🔒" },
+              { label: "Reportes", val: "Semanales", x: "2%", y: "5%", depth: 2, avatar: "📊" },
+              { label: "Equipo", val: "Disponible", x: "18%", y: "95%", depth: 1, avatar: "👥" },
             ].map((stat, idx) => {
               const isSelected = selectedMetric === idx;
               return (
@@ -738,17 +738,7 @@ export default function App() {
             })}
           </div>
 
-          {/* Background AI Face (kept but moved) */}
-          <div className="absolute right-0 bottom-0 w-1/3 h-1/2 opacity-5 pointer-events-none z-0">
-            <img 
-              src="/ai-face.png" 
-              alt="Inteligencia Artificial" 
-              className="w-full h-full object-contain object-right-bottom grayscale opacity-20" 
-              loading="lazy"
-              decoding="async"
-              referrerPolicy="no-referrer" 
-            />
-          </div>
+
         </section>
 
         {/* Sección 5: Footer / CTA */}
