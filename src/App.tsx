@@ -817,7 +817,18 @@ export default function App() {
                           attended: false,
                           contactDate: ''
                         });
-                        
+
+                        // 🔔 Notificación push al celular vía ntfy.sh
+                        fetch('https://ntfy.sh/yeiya-leads-paty2026', {
+                          method: 'POST',
+                          headers: {
+                            'Title': `🔔 Nuevo lead web: ${data.nombre}`,
+                            'Priority': 'high',
+                            'Tags': 'bell,tada',
+                          },
+                          body: `📱 Tel: ${data.telefono}\n📧 ${data.correo}\n💼 ${data.empresa}\n💡 ${data.idea}`,
+                        }).catch(() => {}); // silencioso si falla
+
                         setSubmitSuccess(true);
                         setTimeout(() => {
                           setShowForm(false);
