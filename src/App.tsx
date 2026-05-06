@@ -818,16 +818,16 @@ export default function App() {
                           contactDate: ''
                         });
 
-                        // 🔔 Notificación push al celular vía ntfy.sh (Canal Seguro)
+                        // 🔔 Notificación push al celular vía ntfy.sh (Canal Seguro) - EN PARALELO PARA VELOCIDAD
                         fetch('https://ntfy.sh/yeiya-leads-secure-7x2w9q-patycabrera-2026', {
                           method: 'POST',
+                          body: `📱 Tel: ${data.telefono}\n📧 ${data.correo}\n💡 ${data.idea}`,
                           headers: {
-                            'Title': `🔔 Nuevo lead web: ${data.nombre}`,
+                            'Title': 'Nuevo Lead Web: ' + data.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^\x00-\x7F]/g, ""),
                             'Priority': 'high',
                             'Tags': 'bell,tada',
                           },
-                          body: `📱 Tel: ${data.telefono}\n📧 ${data.correo}\n💼 ${data.empresa}\n💡 ${data.idea}`,
-                        }).catch(() => {}); // silencioso si falla
+                        }).catch(() => {}); 
 
                         setSubmitSuccess(true);
                         setTimeout(() => {
