@@ -508,7 +508,7 @@ export default function App() {
                   boxShadow: "0 0 80px rgba(52, 211, 153, 0.6)",
                   scale: 0.98
                 }}
-                className="min-w-[240px] md:min-w-[300px] aspect-[10/16] bg-stone-950 rounded-[2rem] overflow-hidden relative border border-white/10 snap-center group shadow-2xl isolation-isolate transition-all duration-300"
+                className="min-w-[240px] md:min-w-[300px] aspect-[10/16] bg-stone-950 rounded-[2rem] overflow-hidden relative border border-white/10 snap-center group shadow-2xl isolation-isolate transition-all duration-300 [mask-image:webkit-radial-gradient(white,black)]"
               >
                 {item.video ? (
                   <div className="absolute inset-0 z-10 overflow-hidden rounded-[2rem]">
@@ -525,7 +525,7 @@ export default function App() {
                       loop
                       controls
                       playsInline
-                      className="relative w-full h-full object-cover opacity-100 z-10"
+                      className="relative w-full h-full object-cover opacity-100 z-10 block"
                     />
                   </div>
                 ) : (
@@ -772,7 +772,7 @@ export default function App() {
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
+                    <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none will-change-transform" />
                     <span className="relative z-10 flex items-center gap-2">
                       Empezar ahora <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                     </span>
