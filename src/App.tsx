@@ -1,12 +1,15 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionValueEvent } from 'framer-motion';
 import { ChevronDown, Zap, Play, Star, MessageSquare, ArrowRight, X, Loader2, CheckCircle } from 'lucide-react';
-import { db } from './firebase';
-import { collection, addDoc } from 'firebase/firestore';
 
 // Detecta si el usuario está en un dispositivo móvil (menor rendimiento)
 const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent);
+    }
+    return false;
+  });
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768 || /Mobi|Android/i.test(navigator.userAgent));
     check();
@@ -71,6 +74,7 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [playingVideoIdx, setPlayingVideoIdx] = useState<number | null>(null);
   
   // Track scroll progress within the container
   const { scrollYProgress } = useScroll({
@@ -167,7 +171,7 @@ export default function App() {
         <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: 'url(/hero-bg.png)' }}
+            style={{ backgroundImage: 'url(/hero-bg.webp)' }}
           />
           {/* Gradient Overlay to make the sun more subtle and text more readable - Darker for better contrast */}
           <div className="absolute inset-0 bg-gradient-to-b from-stone-950/80 via-stone-950/50 to-stone-950/90" />
@@ -218,7 +222,7 @@ export default function App() {
 
         {/* Left Character (Woman) - Moves Left to Right */}
         <motion.img 
-          src="/char-left-cup-transparent.png"
+          src="/char-left-cup-transparent.webp"
           alt="Mujer con café"
           className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
           style={{ x: leftX, translateX: "10%" }}
@@ -229,7 +233,7 @@ export default function App() {
 
         {/* Right Character (Man) - Moves Right to Left */}
         <motion.img 
-          src="/char-right-skater-transparent.png"
+          src="/char-right-skater-transparent.webp"
           alt="Hombre con skate"
           className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
           style={{ x: rightX, translateX: "-10%" }}
@@ -302,7 +306,7 @@ export default function App() {
 
           {/* The revealed image */}
           <image 
-            href="/reveal-tablet-woman.png" 
+            href="/reveal-tablet-woman.webp" 
             width="100%" 
             height="100%" 
             preserveAspectRatio="xMidYMid slice" 
@@ -440,7 +444,7 @@ export default function App() {
               <div className="md:col-span-2 h-[350px] md:h-[400px] bg-stone-900 rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col justify-end relative overflow-hidden group shadow-2xl">
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-transparent z-10" />
                 <img 
-                  src="/img4.png" 
+                  src="/img4.webp" 
                   alt="Tecnología avanzada" 
                   className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-300" 
                   loading="lazy"
@@ -455,7 +459,7 @@ export default function App() {
               <div className="h-[300px] md:h-[400px] bg-stone-900 rounded-3xl border border-white/5 p-6 md:p-8 flex flex-col justify-between shadow-2xl group relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent z-10" />
                 <img 
-                  src="/velocidad-pura.jpg" 
+                  src="/velocidad-pura.webp" 
                   alt="Automatizaciones" 
                   className="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-transform duration-500" 
                   loading="lazy"
@@ -491,11 +495,11 @@ export default function App() {
           
           <div className="flex gap-4 md:gap-8 px-6 md:px-24 overflow-x-auto pt-10 pb-12 no-scrollbar snap-x">
             {[
-              { title: "Ecosistema Digital", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701131/grok-video-f0709e25-e241-4dce-936c-8340f21d458b_1_a3jvl7.mp4" },
-              { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
-              { title: "Creamos webs inmersivas de alta gama", desc: "Tecnología avanzada que eleva tu marca al siguiente nivel", img: "/img1.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
-              { title: "Conexión global", desc: "Integramos tu negocio con CRM’s sofisticados para una gestión inteligente", img: "/img3.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
-              { title: "Creamos apps a medida", desc: "Desde apps de delivery hasta soluciones personalizadas, tú eliges lo mejor para tu negocio", img: "/hero-bg-landscape.png", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
+              { title: "Ecosistema Digital", img: "/img3.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701131/grok-video-f0709e25-e241-4dce-936c-8340f21d458b_1_a3jvl7.mp4" },
+              { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/augmented-reality-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
+              { title: "Creamos webs inmersivas de alta gama", desc: "Tecnología avanzada que eleva tu marca al siguiente nivel", img: "/img1.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
+              { title: "Conexión global", desc: "Integramos tu negocio con CRM’s sofisticados para una gestión inteligente", img: "/global-connection-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
+              { title: "Creamos apps a medida", desc: "Desde apps de delivery hasta soluciones personalizadas, tú eliges lo mejor para tu negocio", img: "/custom-apps-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
             ].map((item, i) => (
               <motion.div 
                 key={i}
@@ -511,28 +515,50 @@ export default function App() {
                 className="min-w-[240px] md:min-w-[300px] aspect-[10/16] bg-stone-950 rounded-[2rem] overflow-hidden relative border border-white/10 snap-center group shadow-2xl isolation-isolate transition-all duration-300 [mask-image:webkit-radial-gradient(white,black)]"
               >
                 {item.video ? (
-                  <div className="absolute inset-0 z-10 overflow-hidden rounded-[2rem]">
+                  <div 
+                    className="absolute inset-0 z-10 overflow-hidden rounded-[2rem] cursor-pointer"
+                    onClick={() => setPlayingVideoIdx(playingVideoIdx === i ? null : i)}
+                  >
                     {/* Blurred background for videos that don't match aspect ratio */}
                     <div 
-                      className="absolute inset-0 bg-cover bg-center blur-3xl opacity-40 scale-125"
+                      className="absolute inset-0 bg-cover bg-center blur-3xl opacity-40 scale-125 pointer-events-none"
                       style={{ backgroundImage: `url(${item.img})` }}
                     />
-                    <video 
-                      src={item.video}
-                      poster={item.img}
-                      autoPlay
-                      muted
-                      loop
-                      controls
-                      playsInline
-                      className="relative w-full h-full object-cover opacity-100 z-10 block"
-                    />
+                    {playingVideoIdx === i ? (
+                      <video 
+                        src={item.video}
+                        poster={item.img}
+                        autoPlay
+                        muted
+                        loop
+                        controls
+                        playsInline
+                        className="relative w-full h-full object-cover opacity-100 z-10 block"
+                      />
+                    ) : (
+                      <>
+                        <img 
+                          src={item.img} 
+                          alt={item.title} 
+                          className="relative w-full h-full object-cover opacity-60 z-10 block transition-transform duration-300 group-hover:scale-105 pointer-events-none" 
+                          loading="lazy"
+                          decoding="async"
+                          referrerPolicy="no-referrer" 
+                        />
+                        {/* Centered play button overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                          <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-cyan-500/90 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.2)] group-hover:scale-110">
+                            <Play size={24} className="text-white fill-current translate-x-0.5" />
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 ) : (
                   <img 
                     src={item.img} 
                     alt={item.title} 
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-300" 
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 transition-transform duration-300 pointer-events-none" 
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer" 
@@ -545,16 +571,8 @@ export default function App() {
                 {/* Title at the TOP */}
                 <div className="absolute inset-x-0 top-0 p-4 md:p-6 pointer-events-none z-20">
                   <h4 className="text-white font-semibold text-base md:text-xl mb-1 md:mb-2 drop-shadow-lg">{item.title}</h4>
-                  <p className="text-white/90 text-[11px] md:text-sm leading-snug drop-shadow-md max-w-[85%]">{item.desc || "Transformando la visión en realidad digital."}</p>
+                  <p className="text-white/90 text-[11px] md:text-sm leading-snug drop-shadow-md max-w-[85%]">{item.desc || "Transformando la visión en reality digital."}</p>
                 </div>
-
-                {!item.video && (
-                  <div className="absolute bottom-6 left-6 z-20">
-                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center group-hover:bg-cyan-500 transition-colors">
-                      <Play size={16} className="text-white fill-current" />
-                    </div>
-                  </div>
-                )}
               </motion.div>
             ))}
           </div>
@@ -574,7 +592,7 @@ export default function App() {
               style={{ scale: baseScale, opacity: baseOpacity }}
             >
               <img 
-                src="/hero-bg-landscape.png" 
+                src="/hero-bg-landscape.webp" 
                 alt="Base" 
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -611,7 +629,7 @@ export default function App() {
                 }}
               >
                 <img 
-                  src="/reveal-tablet-woman2.png" 
+                  src="/reveal-tablet-woman2.webp" 
                   alt="Revelación" 
                   className="max-w-[95%] max-h-[85%] md:max-w-[80%] md:max-h-[80%] object-contain drop-shadow-[0_0_80px_rgba(34,211,238,0.2)] rounded-lg md:rounded-2xl border border-cyan-500/10"
                   loading="lazy"
@@ -673,7 +691,8 @@ export default function App() {
               { label: "Pagos", val: "Seguros", x: "65%", y: "92%", depth: 1, avatar: "🔒" },
               { label: "Reportes", val: "Semanales", x: "2%", y: "5%", depth: 2, avatar: "📊" },
               { label: "Equipo", val: "Disponible", x: "18%", y: "95%", depth: 1, avatar: "👥" },
-            ].map((stat, idx) => {
+            ].filter((stat) => !isMobile || stat.depth === 0)
+             .map((stat, idx) => {
               const isSelected = selectedMetric === idx;
               return (
                 <motion.div
@@ -684,12 +703,15 @@ export default function App() {
                     top: stat.y,
                     zIndex: isSelected ? 100 : (stat.depth > 0 ? 0 : 10)
                   }}
-                  animate={{
+                  animate={isMobile ? {
+                    y: isSelected ? -10 : 0,
+                    scale: isSelected ? 1.1 : 1
+                  } : {
                     y: isSelected ? -20 : [0, -15, 0],
                     x: isSelected ? 10 : [0, 8, 0],
                     scale: isSelected ? 1.2 : 1
                   }}
-                  transition={{
+                  transition={isMobile ? { duration: 0.3 } : {
                     duration: isSelected ? 0.3 : 12 + Math.random() * 6,
                     repeat: isSelected ? 0 : Infinity,
                     ease: "easeInOut",
@@ -747,7 +769,7 @@ export default function App() {
         <footer className="relative z-50 py-24 px-6 md:px-24 bg-[#d7ccc8] border-t border-stone-400/20 overflow-hidden">
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <img 
-              src="/split-hero.png" 
+              src="/split-hero.webp" 
               alt="Fondo de contacto" 
               className="w-full h-full object-cover grayscale" 
               loading="lazy"
@@ -806,6 +828,10 @@ export default function App() {
                       const formData = new FormData(e.currentTarget);
                       const data = Object.fromEntries(formData.entries());
                       try {
+                        // Importar Firebase dinámicamente en submit para code splitting
+                        const { db } = await import('./firebase');
+                        const { collection, addDoc } = await import('firebase/firestore');
+
                         // Guardar en Firebase Firestore directamente
                         await addDoc(collection(db, 'leads'), {
                           clientName: data.nombre,
@@ -969,7 +995,7 @@ export default function App() {
                 <div className="relative group flex items-center justify-start">
                   <div className="absolute inset-0 bg-white/40 blur-2xl rounded-full group-hover:bg-white/60 transition-all duration-500 scale-150"></div>
                   <img 
-                    src="/Logo SEARMO estilo t.png" 
+                    src="/Logo SEARMO estilo t.webp" 
                     alt="SEARMO Logo" 
                     className="relative h-28 md:h-40 w-auto object-contain drop-shadow-xl transition-transform duration-500 group-hover:scale-105"
                   />
