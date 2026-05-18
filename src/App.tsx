@@ -224,7 +224,7 @@ export default function App() {
         <motion.img 
           src="/char-left-cup-transparent.webp"
           alt="Mujer con café"
-          className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
+          className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[38vh] sm:h-[48vh] md:h-[85vh] max-h-[360px] md:max-h-none max-w-none object-contain object-right-bottom"
           style={{ x: leftX, translateX: "10%" }}
           fetchPriority="high"
           decoding="async"
@@ -235,7 +235,7 @@ export default function App() {
         <motion.img 
           src="/char-right-skater-transparent.webp"
           alt="Hombre con skate"
-          className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
+          className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[38vh] sm:h-[48vh] md:h-[85vh] max-h-[360px] md:max-h-none max-w-none object-contain object-left-bottom"
           style={{ x: rightX, translateX: "-10%" }}
           fetchPriority="high"
           decoding="async"
@@ -309,7 +309,7 @@ export default function App() {
             href="/reveal-tablet-woman.webp" 
             width="100%" 
             height="100%" 
-            preserveAspectRatio="xMidYMid slice" 
+            preserveAspectRatio={isMobile ? "xMidYMid meet" : "xMidYMid slice"} 
             mask="url(#magic-mask)"
           />
 
@@ -495,11 +495,11 @@ export default function App() {
           
           <div className="flex gap-4 md:gap-8 px-6 md:px-24 overflow-x-auto pt-10 pb-12 no-scrollbar snap-x">
             {[
-              { title: "Ecosistema Digital", img: "/img3.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701131/grok-video-f0709e25-e241-4dce-936c-8340f21d458b_1_a3jvl7.mp4" },
-              { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/augmented-reality-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
-              { title: "Creamos webs inmersivas de alta gama", desc: "Tecnología avanzada que eleva tu marca al siguiente nivel", img: "/img1.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
-              { title: "Conexión global", desc: "Integramos tu negocio con CRM’s sofisticados para una gestión inteligente", img: "/global-connection-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1777702040/crm_3_ma5pj6.mp4" },
-              { title: "Creamos apps a medida", desc: "Desde apps de delivery hasta soluciones personalizadas, tú eliges lo mejor para tu negocio", img: "/custom-apps-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
+              { title: "Ecosistema Digital", img: "/img3.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/a_exif/v1777701131/grok-video-f0709e25-e241-4dce-936c-8340f21d458b_1_a3jvl7.mp4" },
+              { title: "Realidad Aumentada", desc: "El nuevo concepto que se vuelve inmersivo", img: "/augmented-reality-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/a_exif/v1777701275/Screenrecorder-2026-01-22-16-05-13-400_2_dyw5hl.mp4" },
+              { title: "Creamos webs inmersivas de alta gama", desc: "Tecnología avanzada que eleva tu marca al siguiente nivel", img: "/img1.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/a_exif/v1777702431/tu_iburin3_2_gfhmfc.mp4" },
+              { title: "Conexión global", desc: "Integramos tu negocio con CRM’s sofisticados para una gestión inteligente", img: "/global-connection-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/a_exif/v1777702040/crm_3_ma5pj6.mp4" },
+              { title: "Creamos apps a medida", desc: "Desde apps de delivery hasta soluciones personalizadas, tú eliges lo mejor para tu negocio", img: "/custom-apps-card.webp", video: "https://res.cloudinary.com/dlqho62j1/video/upload/a_exif/v1778009565/Screenrecorder-2026-05-05-13-12-56-746_2_wrccgb.mp4" }
             ].map((item, i) => (
               <motion.div 
                 key={i}
