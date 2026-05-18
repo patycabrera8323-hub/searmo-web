@@ -224,7 +224,7 @@ export default function App() {
         <motion.img 
           src="/char-left-cup-transparent.webp"
           alt="Mujer con café"
-          className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[38vh] sm:h-[48vh] md:h-[85vh] max-h-[360px] md:max-h-none max-w-[45vw] md:max-w-none object-contain object-right-bottom"
+          className="absolute right-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-right-bottom"
           style={{ x: leftX, translateX: "10%" }}
           fetchPriority="high"
           decoding="async"
@@ -235,7 +235,7 @@ export default function App() {
         <motion.img 
           src="/char-right-skater-transparent.webp"
           alt="Hombre con skate"
-          className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[38vh] sm:h-[48vh] md:h-[85vh] max-h-[360px] md:max-h-none max-w-[45vw] md:max-w-none object-contain object-left-bottom"
+          className="absolute left-1/2 bottom-[10vh] md:bottom-0 h-[45vh] sm:h-[55vh] md:h-[85vh] max-w-none object-contain object-left-bottom"
           style={{ x: rightX, translateX: "-10%" }}
           fetchPriority="high"
           decoding="async"
@@ -309,7 +309,7 @@ export default function App() {
             href="/reveal-tablet-woman.webp" 
             width="100%" 
             height="100%" 
-            preserveAspectRatio={isMobile ? "xMidYMid meet" : "xMidYMid slice"} 
+            preserveAspectRatio="xMidYMid slice" 
             mask="url(#magic-mask)"
           />
 
